@@ -1,0 +1,26 @@
+# Local identity data and original unredacted submissions
+private/
+experiments/results*/
+experiments/reference_outputs/
+experiments/reports/
+data/images/
+data/ground_truth.*
+
+# Runtime artifacts
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+.venv/
+venv/
+.env
+.env.*
+!.env.example
+*.parquet
+*.pt
+*.pth
+*.onnx
+*.joblib
+*.pkl
+*.zip
+*.tar.gz
+.DS_Store

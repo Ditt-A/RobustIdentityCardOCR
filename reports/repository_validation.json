@@ -1,0 +1,12 @@
+{
+  "python": "3.13.5",
+  "rapidfuzz": "3.14.3",
+  "syntax_valid_python_files": 51,
+  "v27_reference_verification": "passed",
+  "v28_aggregate_metrics_comparison": "passed",
+  "v28_prediction_values_match": false,
+  "v28_different_name_values": 1,
+  "notebooks_without_outputs": 3,
+  "project_portfolio_pages": 9,
+  "raw_image_ocr_rerun": false
+}

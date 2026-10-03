@@ -1,0 +1,357 @@
+[
+  {
+    "source_archive": "v3-27",
+    "source_path": "scripts/01_Workspace_Inspection.py",
+    "destination": "archive/phase_entrypoints/01_Workspace_Inspection.py"
+  },
+  {
+    "source_archive": "v3-27",
+    "source_path": "scripts/02_Ground_Truth_Audit_EDA.py",
+    "destination": "archive/phase_entrypoints/02_Ground_Truth_Audit_EDA.py"
+  },
+  {
+    "source_archive": "v3-27",
+    "source_path": "scripts/03_Image_Quality_EDA.py",
+    "destination": "archive/phase_entrypoints/03_Image_Quality_EDA.py"
+  },
+  {
+    "source_archive": "v3-27",
+    "source_path": "scripts/04_Document_Localization.py",
+    "destination": "archive/phase_entrypoints/04_Document_Localization.py"
+  },
+  {
+    "source_archive": "v3-27",
+    "source_path": "scripts/05_Geometric_Normalization.py",
+    "destination": "archive/phase_entrypoints/05_Geometric_Normalization.py"
+  },
+  {
+    "source_archive": "v3-27",
+    "source_path": "scripts/06_Preprocessing_DocRes.py",
+    "destination": "archive/phase_entrypoints/06_Preprocessing_DocRes.py"
+  },
+  {
+    "source_archive": "v3-27",
+    "source_path": "scripts/07_OCR_Benchmark.py",
+    "destination": "archive/phase_entrypoints/07_OCR_Benchmark.py"
+  },
+  {
+    "source_archive": "v3-27",
+    "source_path": "scripts/08_SVTRv2_Benchmark.py",
+    "destination": "archive/phase_entrypoints/08_SVTRv2_Benchmark.py"
+  },
+  {
+    "source_archive": "v3-27",
+    "source_path": "scripts/09_RapidOCR_Runtime.py",
+    "destination": "archive/phase_entrypoints/09_RapidOCR_Runtime.py"
+  },
+  {
+    "source_archive": "v3-27",
+    "source_path": "scripts/10_Document_Family_Router.py",
+    "destination": "archive/phase_entrypoints/10_Document_Family_Router.py"
+  },
+  {
+    "source_archive": "v3-27",
+    "source_path": "scripts/11_MRZ_MyKad_Parsers.py",
+    "destination": "archive/phase_entrypoints/11_MRZ_MyKad_Parsers.py"
+  },
+  {
+    "source_archive": "v3-27",
+    "source_path": "scripts/12_Document_Graph.py",
+    "destination": "archive/phase_entrypoints/12_Document_Graph.py"
+  },
+  {
+    "source_archive": "v3-27",
+    "source_path": "scripts/13_Field_Resolver_Address_Gate.py",
+    "destination": "archive/phase_entrypoints/13_Field_Resolver_Address_Gate.py"
+  },
+  {
+    "source_archive": "v3-27",
+    "source_path": "scripts/14_Full_Experiment_Matrix.py",
+    "destination": "archive/phase_entrypoints/14_Full_Experiment_Matrix.py"
+  },
+  {
+    "source_archive": "v3-27",
+    "source_path": "scripts/15_Ablation_Study.py",
+    "destination": "archive/phase_entrypoints/15_Ablation_Study.py"
+  },
+  {
+    "source_archive": "v3-27",
+    "source_path": "scripts/16_Robustness_Consistency.py",
+    "destination": "archive/phase_entrypoints/16_Robustness_Consistency.py"
+  },
+  {
+    "source_archive": "v3-27",
+    "source_path": "scripts/17_Latency_Memory_Pareto.py",
+    "destination": "archive/phase_entrypoints/17_Latency_Memory_Pareto.py"
+  },
+  {
+    "source_archive": "v3-27",
+    "source_path": "scripts/18_Final_Conclusions.py",
+    "destination": "archive/phase_entrypoints/18_Final_Conclusions.py"
+  },
+  {
+    "source_archive": "v3-27",
+    "source_path": "scripts/_phase_runner.py",
+    "destination": "archive/phase_entrypoints/_phase_runner.py"
+  },
+  {
+    "source_archive": "v3-27",
+    "source_path": "scripts/README.md",
+    "destination": "archive/phase_entrypoints/README.md"
+  },
+  {
+    "source_archive": "v3-27",
+    "source_path": "scripts_v10/01_supervised_mykad_address_span_ranker.py",
+    "destination": "experiments/scripts_v10/01_supervised_mykad_address_span_ranker.py"
+  },
+  {
+    "source_archive": "v3-27",
+    "source_path": "scripts_v11/01_mykad_address_format_consensus.py",
+    "destination": "experiments/scripts_v11/01_mykad_address_format_consensus.py"
+  },
+  {
+    "source_archive": "v3-27",
+    "source_path": "scripts_v12/01_mykad_visual_error_guard.py",
+    "destination": "experiments/scripts_v12/01_mykad_visual_error_guard.py"
+  },
+  {
+    "source_archive": "v3-27",
+    "source_path": "scripts_v13/01_mykad_guarded_format_consensus.py",
+    "destination": "experiments/scripts_v13/01_mykad_guarded_format_consensus.py"
+  },
+  {
+    "source_archive": "v3-27",
+    "source_path": "scripts_v14/01_gpu_targeted_address_reocr.py",
+    "destination": "experiments/scripts_v14/01_gpu_targeted_address_reocr.py"
+  },
+  {
+    "source_archive": "v3-27",
+    "source_path": "scripts_v15/01_gpu_format_only_guard.py",
+    "destination": "experiments/scripts_v15/01_gpu_format_only_guard.py"
+  },
+  {
+    "source_archive": "v3-27",
+    "source_path": "scripts_v16/01_all_malaysian_address_cards_gpu.py",
+    "destination": "experiments/scripts_v16/01_all_malaysian_address_cards_gpu.py"
+  },
+  {
+    "source_archive": "v3-27",
+    "source_path": "scripts_v17/01_per_layout_generic_mrz_gpu.py",
+    "destination": "experiments/scripts_v17/01_per_layout_generic_mrz_gpu.py"
+  },
+  {
+    "source_archive": "v3-27",
+    "source_path": "scripts_v18/01_group_consensus_generic_fields.py",
+    "destination": "experiments/scripts_v18/01_group_consensus_generic_fields.py"
+  },
+  {
+    "source_archive": "v3-27",
+    "source_path": "scripts_v19/01_spain_component_group_consensus.py",
+    "destination": "experiments/scripts_v19/01_spain_component_group_consensus.py"
+  },
+  {
+    "source_archive": "v3-27",
+    "source_path": "scripts_v20/01_chile_dob_group_consensus.py",
+    "destination": "experiments/scripts_v20/01_chile_dob_group_consensus.py"
+  },
+  {
+    "source_archive": "v3-27",
+    "source_path": "scripts_v21/01_extended_generic_group_consensus.py",
+    "destination": "experiments/scripts_v21/01_extended_generic_group_consensus.py"
+  },
+  {
+    "source_archive": "v3-27",
+    "source_path": "scripts_v22/01_final_permit_ukraine_consensus.py",
+    "destination": "experiments/scripts_v22/01_final_permit_ukraine_consensus.py"
+  },
+  {
+    "source_archive": "v3-27",
+    "source_path": "scripts_v23/01_ukraine_latin_consensus.py",
+    "destination": "experiments/scripts_v23/01_ukraine_latin_consensus.py"
+  },
+  {
+    "source_archive": "v3-27",
+    "source_path": "scripts_v24/01_ukraine_latin_route_gate.py",
+    "destination": "experiments/scripts_v24/01_ukraine_latin_route_gate.py"
+  },
+  {
+    "source_archive": "v3-27",
+    "source_path": "scripts_v25/01_mykad_address_format_gate.py",
+    "destination": "experiments/scripts_v25/01_mykad_address_format_gate.py"
+  },
+  {
+    "source_archive": "v3-27",
+    "source_path": "scripts_v26/01_mykad_name_span_ranker.py",
+    "destination": "experiments/scripts_v26/01_mykad_name_span_ranker.py"
+  },
+  {
+    "source_archive": "v3-27",
+    "source_path": "scripts_v27/01_fuzzy_peer_medoid_names.py",
+    "destination": "experiments/scripts_v27/01_fuzzy_peer_medoid_names.py"
+  },
+  {
+    "source_archive": "v3-27",
+    "source_path": "scripts_v3/01_ppocrv5_identity_consensus.py",
+    "destination": "experiments/scripts_v3/01_ppocrv5_identity_consensus.py"
+  },
+  {
+    "source_archive": "v3-27",
+    "source_path": "scripts_v3/README.md",
+    "destination": "experiments/scripts_v3/README.md"
+  },
+  {
+    "source_archive": "v3-27",
+    "source_path": "scripts_v4/01_dinov2_visual_identity_linker.py",
+    "destination": "experiments/scripts_v4/01_dinov2_visual_identity_linker.py"
+  },
+  {
+    "source_archive": "v3-27",
+    "source_path": "scripts_v4/README.md",
+    "destination": "experiments/scripts_v4/README.md"
+  },
+  {
+    "source_archive": "v3-27",
+    "source_path": "scripts_v5/01_yolo_face_arcface_identity_linker.py",
+    "destination": "experiments/scripts_v5/01_yolo_face_arcface_identity_linker.py"
+  },
+  {
+    "source_archive": "v3-27",
+    "source_path": "scripts_v5/README.md",
+    "destination": "experiments/scripts_v5/README.md"
+  },
+  {
+    "source_archive": "v3-27",
+    "source_path": "scripts_v6/01_fuzzy_embedding_address_consensus.py",
+    "destination": "experiments/scripts_v6/01_fuzzy_embedding_address_consensus.py"
+  },
+  {
+    "source_archive": "v3-27",
+    "source_path": "scripts_v6/README.md",
+    "destination": "experiments/scripts_v6/README.md"
+  },
+  {
+    "source_archive": "v3-27",
+    "source_path": "scripts_v7/01_address_roi_geometry_ocr.py",
+    "destination": "experiments/scripts_v7/01_address_roi_geometry_ocr.py"
+  },
+  {
+    "source_archive": "v3-27",
+    "source_path": "scripts_v7/README.md",
+    "destination": "experiments/scripts_v7/README.md"
+  },
+  {
+    "source_archive": "v3-27",
+    "source_path": "scripts_v8/01_weakly_supervised_address_span_selector.py",
+    "destination": "experiments/scripts_v8/01_weakly_supervised_address_span_selector.py"
+  },
+  {
+    "source_archive": "v3-27",
+    "source_path": "scripts_v8/README.md",
+    "destination": "experiments/scripts_v8/README.md"
+  },
+  {
+    "source_archive": "v3-27",
+    "source_path": "scripts_v9/01_address_template_audit.py",
+    "destination": "experiments/scripts_v9/01_address_template_audit.py"
+  },
+  {
+    "source_archive": "v3-27",
+    "source_path": "scripts_v9/README.md",
+    "destination": "experiments/scripts_v9/README.md"
+  },
+  {
+    "source_archive": "v27-28",
+    "source_path": "identity_ocr_compfest18.py",
+    "destination": "experiments/identity_ocr_compfest18.py"
+  },
+  {
+    "source_archive": "v27-28",
+    "source_path": "run_v27.py",
+    "destination": "experiments/run_v27.py"
+  },
+  {
+    "source_archive": "v27-28",
+    "source_path": "run_v28.py",
+    "destination": "experiments/run_v28.py"
+  },
+  {
+    "source_archive": "v27-28",
+    "source_path": "scripts_v10/01_supervised_mykad_address_span_ranker.py",
+    "destination": "experiments/scripts_v10/01_supervised_mykad_address_span_ranker.py"
+  },
+  {
+    "source_archive": "v27-28",
+    "source_path": "scripts_v11/01_mykad_address_format_consensus.py",
+    "destination": "experiments/scripts_v11/01_mykad_address_format_consensus.py"
+  },
+  {
+    "source_archive": "v27-28",
+    "source_path": "scripts_v12/01_mykad_visual_error_guard.py",
+    "destination": "experiments/scripts_v12/01_mykad_visual_error_guard.py"
+  },
+  {
+    "source_archive": "v27-28",
+    "source_path": "scripts_v13/01_mykad_guarded_format_consensus.py",
+    "destination": "experiments/scripts_v13/01_mykad_guarded_format_consensus.py"
+  },
+  {
+    "source_archive": "v27-28",
+    "source_path": "scripts_v14/01_gpu_targeted_address_reocr.py",
+    "destination": "experiments/scripts_v14/01_gpu_targeted_address_reocr.py"
+  },
+  {
+    "source_archive": "v27-28",
+    "source_path": "scripts_v15/01_gpu_format_only_guard.py",
+    "destination": "experiments/scripts_v15/01_gpu_format_only_guard.py"
+  },
+  {
+    "source_archive": "v27-28",
+    "source_path": "scripts_v16/01_all_malaysian_address_cards_gpu.py",
+    "destination": "experiments/scripts_v16/01_all_malaysian_address_cards_gpu.py"
+  },
+  {
+    "source_archive": "v27-28",
+    "source_path": "scripts_v17/01_per_layout_generic_mrz_gpu.py",
+    "destination": "experiments/scripts_v17/01_per_layout_generic_mrz_gpu.py"
+  },
+  {
+    "source_archive": "v27-28",
+    "source_path": "scripts_v18/01_group_consensus_generic_fields.py",
+    "destination": "experiments/scripts_v18/01_group_consensus_generic_fields.py"
+  },
+  {
+    "source_archive": "v27-28",
+    "source_path": "scripts_v24/01_ukraine_latin_route_gate.py",
+    "destination": "experiments/scripts_v24/01_ukraine_latin_route_gate.py"
+  },
+  {
+    "source_archive": "v27-28",
+    "source_path": "scripts_v25/01_mykad_address_format_gate.py",
+    "destination": "experiments/scripts_v25/01_mykad_address_format_gate.py"
+  },
+  {
+    "source_archive": "v27-28",
+    "source_path": "scripts_v26/01_mykad_name_span_ranker.py",
+    "destination": "experiments/scripts_v26/01_mykad_name_span_ranker.py"
+  },
+  {
+    "source_archive": "v27-28",
+    "source_path": "scripts_v27/01_fuzzy_peer_medoid_names.py",
+    "destination": "experiments/scripts_v27/01_fuzzy_peer_medoid_names.py"
+  },
+  {
+    "source_archive": "v27-28",
+    "source_path": "scripts_v28/01_generic_unknown_peer_consensus.py",
+    "destination": "experiments/scripts_v28/01_generic_unknown_peer_consensus.py"
+  },
+  {
+    "source_archive": "v27-28",
+    "source_path": "scripts_v3/01_ppocrv5_identity_consensus.py",
+    "destination": "experiments/scripts_v3/01_ppocrv5_identity_consensus.py"
+  },
+  {
+    "source_archive": "v27-28",
+    "source_path": "scripts_v8/01_weakly_supervised_address_span_selector.py",
+    "destination": "experiments/scripts_v8/01_weakly_supervised_address_span_selector.py"
+  }
+]
