@@ -54,35 +54,35 @@ async def security_headers(request: Request, call_next):
 def _check_local_host(request: Request) -> None:
     host = request.headers.get("host", "").lower()
     if host not in ALLOWED_HOSTS:
-        raise HTTPException(status_code=400, detail="Gunakan alamat local runner 127.0.0.1:8787.")
+        raise HTTPException(status_code=400, detail="Use the local runner address 127.0.0.1:8787.")
 
     client_host = request.client.host if request.client else ""
     try:
         if not ipaddress.ip_address(client_host).is_loopback:
-            raise HTTPException(status_code=403, detail="API hanya menerima koneksi dari perangkat ini.")
+            raise HTTPException(status_code=403, detail="The API accepts connections only from this device.")
     except ValueError:
-        raise HTTPException(status_code=403, detail="API hanya menerima koneksi loopback.") from None
+        raise HTTPException(status_code=403, detail="The API accepts loopback connections only.") from None
 
 
 def _check_browser_origin(request: Request) -> None:
     _check_local_host(request)
     origin = request.headers.get("origin")
     if origin not in ALLOWED_ORIGINS:
-        raise HTTPException(status_code=403, detail="Permintaan hanya diterima dari halaman local runner.")
+        raise HTTPException(status_code=403, detail="Requests are accepted only from the local runner page.")
 
 
 def _decode_image(data: bytes) -> Image.Image:
     if not data:
-        raise HTTPException(status_code=400, detail="File gambar kosong.")
+        raise HTTPException(status_code=400, detail="The image file is empty.")
 
     try:
         with warnings.catch_warnings():
             warnings.simplefilter("error", Image.DecompressionBombWarning)
             with Image.open(BytesIO(data)) as probe:
                 if probe.format not in {"JPEG", "PNG", "WEBP"}:
-                    raise HTTPException(status_code=415, detail="Format gambar harus JPG, PNG, atau WebP.")
+                    raise HTTPException(status_code=415, detail="The image format must be JPG, PNG, or WebP.")
                 if probe.width * probe.height > MAX_IMAGE_PIXELS or max(probe.size) > MAX_IMAGE_EDGE:
-                    raise HTTPException(status_code=413, detail="Resolusi gambar terlalu besar untuk demo lokal.")
+                    raise HTTPException(status_code=413, detail="The image resolution is too large for the local demo.")
                 probe.verify()
 
             with Image.open(BytesIO(data)) as source:
@@ -90,7 +90,7 @@ def _decode_image(data: bytes) -> Image.Image:
     except HTTPException:
         raise
     except (UnidentifiedImageError, OSError, Image.DecompressionBombError, Image.DecompressionBombWarning):
-        raise HTTPException(status_code=415, detail="File tidak bisa dibaca sebagai gambar yang valid.") from None
+        raise HTTPException(status_code=415, detail="The file could not be read as a valid image.") from None
 
     return image
 
@@ -103,7 +103,7 @@ async def _read_limited(upload: UploadFile) -> bytes:
             break
         content.extend(chunk)
         if len(content) > MAX_UPLOAD_BYTES:
-            raise HTTPException(status_code=413, detail="Ukuran gambar melewati batas 8 MB.")
+            raise HTTPException(status_code=413, detail="The image exceeds the 8 MB limit.")
     return bytes(content)
 
 
@@ -123,7 +123,7 @@ async def ocr(request: Request, file: UploadFile = File(...)):
 
     image = _decode_image(content)
     if not model_status()["ready"]:
-        raise HTTPException(status_code=503, detail="Weights lokal belum lengkap. Periksa folder model yang ditampilkan di halaman.")
+        raise HTTPException(status_code=503, detail="Local model weights are incomplete. Check the model folders shown on the page.")
 
     try:
         return await run_in_threadpool(run_pipeline, image)
@@ -131,7 +131,7 @@ async def ocr(request: Request, file: UploadFile = File(...)):
         raise HTTPException(status_code=503, detail=str(exc)) from None
     except Exception as exc:
         logger.error("Local OCR pipeline failed (%s).", type(exc).__name__)
-        raise HTTPException(status_code=500, detail=f"Pipeline lokal gagal ({type(exc).__name__}). Periksa instalasi dan model lokal.") from None
+        raise HTTPException(status_code=500, detail=f"The local pipeline failed ({type(exc).__name__}). Check the installation and local models.") from None
 
 
 @app.get("/", include_in_schema=False)
@@ -147,10 +147,10 @@ async def static_asset(request: Request, asset_path: str):
     try:
         target.relative_to(WEB_DIR.resolve())
     except ValueError:
-        raise HTTPException(status_code=404, detail="File tidak ditemukan.") from None
+        raise HTTPException(status_code=404, detail="File not found.") from None
 
     if any(part.lower() in {"local_runner", "models", ".venv", "__pycache__"} for part in target.relative_to(WEB_DIR.resolve()).parts):
-        raise HTTPException(status_code=404, detail="File tidak ditemukan.")
+        raise HTTPException(status_code=404, detail="File not found.")
     if not target.is_file() or target.suffix.lower() not in STATIC_SUFFIXES:
-        raise HTTPException(status_code=404, detail="File tidak ditemukan.")
+        raise HTTPException(status_code=404, detail="File not found.")
     return FileResponse(target)

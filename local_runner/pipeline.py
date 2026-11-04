@@ -34,7 +34,7 @@ _ocr_engine: Any | None = None
 
 def profile_models() -> tuple[str, str]:
     if PROFILE_NAME not in PROFILES:
-        raise RuntimeError("OCR_PROFILE harus bernilai tiny, small, atau medium.")
+        raise RuntimeError("OCR_PROFILE must be tiny, small, or medium.")
     return PROFILES[PROFILE_NAME]
 
 
@@ -69,12 +69,12 @@ def model_status() -> dict[str, Any]:
         return {
             "ready": False,
             "loaded": False,
-            "model_label": "PP-OCRv6 (profil tidak dikenal)",
+            "model_label": "PP-OCRv6 (unknown profile)",
             "model_paths": {
                 "det": "$OCR_DET_MODEL_DIR",
                 "rec": "$OCR_REC_MODEL_DIR",
             },
-            "message": "OCR_PROFILE harus bernilai tiny, small, atau medium.",
+            "message": "OCR_PROFILE must be tiny, small, or medium.",
         }
 
     det_name, rec_name = profile_models()
@@ -94,7 +94,7 @@ def model_status() -> dict[str, Any]:
             "det": _display_path(det_path, "det"),
             "rec": _display_path(rec_path, "rec"),
         },
-        "message": "Weights lokal belum lengkap: " + ", ".join(missing) if missing else "Weights lokal siap.",
+        "message": "Local model weights are incomplete: " + ", ".join(missing) if missing else "Local model weights are ready.",
     }
 
 
@@ -132,7 +132,7 @@ def load_model() -> Any:
             )
         except Exception as exc:
             _ocr_engine = None
-            raise RuntimeError(f"Model lokal gagal dimuat ({type(exc).__name__}). Periksa versi dependency dan isi folder model.") from None
+            raise RuntimeError(f"Failed to load the local model ({type(exc).__name__}). Check the dependency versions and model files.") from None
 
     return _ocr_engine
 
@@ -278,11 +278,11 @@ def _birth_date(lines: list[dict[str, Any]]) -> str | None:
 def extract_object(lines: list[dict[str, Any]]) -> dict[str, Any]:
     """Extract only explicit labelled values; do not guess unlabeled identity fields."""
     return {
-        "jenis_dokumen": None,
-        "nama": _field_after_label(lines, NAME_LABEL),
-        "tanggal_lahir": _birth_date(lines),
-        "alamat": _field_after_label(lines, ADDRESS_LABEL),
-        "teks_ocr": lines,
+        "document_type": None,
+        "name": _field_after_label(lines, NAME_LABEL),
+        "date_of_birth": _birth_date(lines),
+        "address": _field_after_label(lines, ADDRESS_LABEL),
+        "ocr_text": lines,
     }
 
 

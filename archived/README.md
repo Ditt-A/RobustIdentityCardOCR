@@ -1,14 +1,14 @@
-# Arsip riset OCR
+# Archived OCR research
 
-Materi pengembangan versi V3–V28 dipindahkan ke sini agar root repo hanya berisi situs deployable, runner lokal, laporan benchmark terpilih, dan dokumen arsitektur.
+Development materials for versions V3–V28 are stored here. The repository root contains the deployable website, local runner, selected benchmark reports, and architecture documentation.
 
-Isi arsip mencakup:
+The archive includes:
 
-- experiments/, termasuk direktori scripts_v3 hingga scripts_v28
-- scripts/ dan entry point reproduksi V27/V28
-- notebooks/ dan dependency notebook
+- experiments/, including the scripts_v3 through scripts_v28 directories
+- scripts/ and V27/V28 reproduction entry points
+- notebooks/ and notebook dependencies
 - legacy-research/phase_entrypoints/
-- laporan reproduksi/eksperimen lama dan peta sumber
-- README-research.md, salinan README riset sebelumnya
+- Older reproduction and experiment reports, plus source maps
+- README-research.md, a copy of the previous research README
 
-Kode arsip dipertahankan untuk provenance. Situs root dan local_runner/ tidak mengimpor kode dari sini.
+The archived code is retained for provenance. The root website and local_runner/ do not import code from this directory.

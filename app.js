@@ -1,21 +1,21 @@
 const samples = {
   "001": {
-    label: "Sampel dataset 001",
+    label: "Dataset sample 001",
     filename: "image_001.jpg",
     image: "assets/dataset-001-redacted.jpg",
-    alt: "Foto sampel image_001 dari dataset Drive dengan detail identitas disamarkan",
+    alt: "Dataset sample image_001 with selected identity details redacted",
   },
   "150": {
-    label: "Sampel dataset 150",
+    label: "Dataset sample 150",
     filename: "image_150.jpg",
     image: "assets/dataset-150-redacted.jpg",
-    alt: "Foto sampel image_150 dari dataset Drive dengan detail identitas disamarkan",
+    alt: "Dataset sample image_150 with selected identity details redacted",
   },
   "300": {
-    label: "Sampel dataset 300",
+    label: "Dataset sample 300",
     filename: "image_300.jpg",
     image: "assets/dataset-300-redacted.jpg",
-    alt: "Foto sampel image_300 dari dataset Drive dengan detail identitas disamarkan",
+    alt: "Dataset sample image_300 with selected identity details redacted",
   },
 };
 
@@ -56,7 +56,7 @@ if (document.body.hasAttribute("data-simulation")) {
       const result = document.createElement("b");
       field.textContent = key;
       result.textContent = value === null || value === undefined || value === ""
-        ? "Tidak terdeteksi"
+        ? "Not detected"
         : String(value);
       row.append(field, result);
       fieldPreview.append(row);
@@ -88,32 +88,32 @@ if (document.body.hasAttribute("data-simulation")) {
 
     byId("sample-art").src = sample.image;
     byId("sample-art").alt = sample.alt;
-    byId("sample-caption").textContent = `DRIVE · ${sample.filename} · detail disamarkan`;
+    byId("sample-caption").textContent = "DRIVE · " + sample.filename + " · selected details redacted";
     byId("route-summary-title").textContent = sample.label;
-    byId("route-summary-detail").textContent = "Satu foto berlabel dari folder Drive. Jenis dokumen tidak ditebak.";
+    byId("route-summary-detail").textContent = "One labeled photo from the Drive folder. The document type is not guessed.";
 
     const object = {
-      sumber_dataset: sample.filename,
-      jenis_dokumen: null,
-      nama: "[DISAMARKAN]",
-      tanggal_lahir: "[DISAMARKAN]",
-      alamat: "[DISAMARKAN]",
+      dataset_source: sample.filename,
+      document_type: null,
+      name: "[REDACTED]",
+      date_of_birth: "[REDACTED]",
+      address: "[REDACTED]",
     };
 
     setResult({
       documentLabel: sample.label,
       kind: "PLACEHOLDER",
-      kicker: "OUTPUT OVERVIEW",
-      title: "Object contoh",
+      kicker: "OVERVIEW OUTPUT",
+      title: "Example object",
       fields: [
-        ["nama", "[DISAMARKAN]"],
-        ["tanggal_lahir", "[DISAMARKAN]"],
-        ["alamat", "[DISAMARKAN]"],
+        ["name", "[REDACTED]"],
+        ["date_of_birth", "[REDACTED]"],
+        ["address", "[REDACTED]"],
       ],
       object,
       status: announced
-        ? "Overview ditampilkan · nilai personal tetap disamarkan"
-        : "Placeholder overview · model OCR belum dijalankan",
+        ? "Overview displayed · personal values remain redacted"
+        : "Overview placeholder · OCR has not been run",
     });
   }
 
@@ -138,15 +138,15 @@ if (document.body.hasAttribute("data-simulation")) {
     if (!isLocalRunnerOrigin()) {
       setHealthState(
         "offline",
-        "Local runner belum aktif",
-        "Siapkan dependency dan weights, lalu buka simulasi melalui http://127.0.0.1:8787/simulasi.html."
+        "Local runner is offline",
+        "Install dependencies and add model weights, then open the simulator at http://127.0.0.1:8787/simulasi.html."
       );
-      byId("local-runner-hint").textContent = "Dari folder web, jalankan local_runner\\setup-local.ps1 sekali, siapkan weights, lalu local_runner\\start-local.ps1.";
+      byId("local-runner-hint").textContent = "From the repository folder, run local_runner\\setup-local.ps1 once, add model weights, then run local_runner\\start-local.ps1.";
       refreshRunButton();
       return;
     }
 
-    setHealthState("loading", "Memeriksa model lokal", "Meminta status backend pada perangkat ini saja.");
+    setHealthState("loading", "Checking local model", "Checking the backend on this computer only.");
     try {
       const response = await fetch("/api/health", { cache: "no-store", credentials: "same-origin" });
       if (!response.ok) throw new Error("health endpoint unavailable");
@@ -156,29 +156,29 @@ if (document.body.hasAttribute("data-simulation")) {
       window.localOcrReady = Boolean(health.ready);
 
       if (health.ready) {
-        setHealthState("ready", "Backend lokal siap", `${health.model_label} tersedia. Model baru dimuat saat OCR pertama kali dijalankan.`);
-        byId("local-runner-hint").textContent = "Gambar tidak dikirim sebelum tombol Jalankan OCR ditekan.";
+        setHealthState("ready", "Local backend is ready", health.model_label + " is available. The model loads when you run OCR for the first time.");
+        byId("local-runner-hint").textContent = "The image is not uploaded until you select Run OCR.";
       } else {
-        setHealthState("missing", "Weights belum ditemukan", `Siapkan model di path yang ditampilkan. ${health.message}`);
-        byId("local-runner-hint").textContent = "Weights tidak termasuk di repo; backend tidak akan mengunduh model secara otomatis.";
+        setHealthState("missing", "Model weights not found", "Place the model files at the paths shown. " + health.message);
+        byId("local-runner-hint").textContent = "Model weights are not included in the repository; the backend will not download them automatically.";
       }
     } catch {
       window.localOcrReady = false;
-      setHealthState("offline", "Local runner belum aktif", "Siapkan dependency dan weights, jalankan local_runner\\start-local.ps1, lalu buka alamat 127.0.0.1:8787.");
-      byId("local-runner-hint").textContent = "Tidak ada gambar yang dikirim ke alamat hosting atau server jarak jauh.";
+      setHealthState("offline", "Local runner is offline", "Install dependencies and add model weights, run local_runner\\start-local.ps1, then open 127.0.0.1:8787.");
+      byId("local-runner-hint").textContent = "No images are sent to the public host or a remote server.";
     }
     refreshRunButton();
   }
 
   function resetLocalResult() {
     setResult({
-      documentLabel: "Menunggu gambar",
-      kind: "LOKAL",
-      kicker: "OUTPUT OCR LOKAL",
-      title: "Object hasil ekstraksi",
-      fields: [["nama", null], ["tanggal_lahir", null], ["alamat", null]],
-      object: { status: "menunggu_gambar" },
-      status: "Pilih gambar untuk menyiapkan inferensi lokal.",
+      documentLabel: "Waiting for an image",
+      kind: "LOCAL",
+      kicker: "LOCAL OCR OUTPUT",
+      title: "Extracted object",
+      fields: [["name", null], ["date_of_birth", null], ["address", null]],
+      object: { status: "waiting_for_image" },
+      status: "Choose an image to prepare local inference.",
     });
   }
 
@@ -195,22 +195,22 @@ if (document.body.hasAttribute("data-simulation")) {
     });
 
     if (mode === "overview") {
-      byId("notice-title").textContent = "Overview · sampel dataset asli";
-      byId("notice-copy").textContent = "Teks identitas dan area foto disamarkan. JSON yang terlihat adalah placeholder; model OCR tidak dijalankan pada mode ini.";
-      byId("notice-tag").textContent = "DATASET DRIVE";
+      byId("notice-title").textContent = "Overview · real dataset samples";
+      byId("notice-copy").textContent = "Faces and selected identity values are redacted. The JSON shown is a placeholder; OCR does not run in this mode.";
+      byId("notice-tag").textContent = "DRIVE DATASET";
       renderOverview(selectedSample);
     } else {
-      byId("notice-title").textContent = "Jalankan OCR di laptop";
-      byId("notice-copy").textContent = "Model dan gambar diproses lokal oleh runner di perangkat ini. Unggahan hanya terjadi setelah tombol OCR ditekan.";
-      byId("notice-tag").textContent = "LOCALHOST SAJA";
-      if (!lastObject || lastObject.status !== "menunggu_gambar") resetLocalResult();
+      byId("notice-title").textContent = "Run OCR on your computer";
+      byId("notice-copy").textContent = "The runner processes the model and image locally on this computer. The image is uploaded only after you start OCR.";
+      byId("notice-tag").textContent = "LOCALHOST ONLY";
+      if (!lastObject || lastObject.status !== "waiting_for_image") resetLocalResult();
       void checkLocalRunner();
     }
   }
 
   function requestLocalMode() {
     if (!localDialog || typeof localDialog.showModal !== "function") {
-      if (window.confirm("Mode ini menjalankan OCR di laptop melalui local runner. Gambar tidak dikirim ke server online. Lanjutkan?")) {
+      if (window.confirm("This mode runs OCR on your computer through the local runner. The image is not sent to an online server. Continue?")) {
         setMode("local");
       }
       return;
@@ -276,7 +276,7 @@ if (document.body.hasAttribute("data-simulation")) {
 
   runOverviewButton.addEventListener("click", () => {
     renderOverview(selectedSample, true);
-    showToast("Object overview ditampilkan. Nilai personal tetap disamarkan.");
+    showToast("Overview object displayed. Personal values remain redacted.");
   });
 
   localImageInput.addEventListener("change", () => {
@@ -285,12 +285,12 @@ if (document.body.hasAttribute("data-simulation")) {
     const allowed = allowedMimeTypes.has(candidate.type) || /\.(jpe?g|png|webp)$/i.test(candidate.name);
     if (!allowed) {
       clearSelectedFile();
-      showToast("Pilih file JPG, PNG, atau WebP.");
+      showToast("Choose a JPG, PNG, or WebP file.");
       return;
     }
     if (candidate.size > maxUploadBytes) {
       clearSelectedFile();
-      showToast("Ukuran gambar melebihi batas 8 MB.");
+      showToast("The image exceeds the 8 MB limit.");
       return;
     }
 
@@ -299,7 +299,7 @@ if (document.body.hasAttribute("data-simulation")) {
     previewUrl = URL.createObjectURL(candidate);
     byId("local-preview").src = previewUrl;
     byId("local-file-name").textContent = candidate.name;
-    byId("local-file-size").textContent = `${(candidate.size / 1024 / 1024).toFixed(2)} MB · pratinjau lokal`;
+    byId("local-file-size").textContent = (candidate.size / 1024 / 1024).toFixed(2) + " MB · local preview";
     byId("local-file-preview").hidden = false;
     resetLocalResult();
     refreshRunButton();
@@ -309,15 +309,15 @@ if (document.body.hasAttribute("data-simulation")) {
 
   runLocalButton.addEventListener("click", async () => {
     if (!isLocalRunnerOrigin() || !selectedFile || !window.localOcrReady) {
-      showToast("Local runner atau weights belum siap.");
+      showToast("The local runner or model weights are not ready.");
       return;
     }
 
     runLocalButton.disabled = true;
-    runLocalButton.innerHTML = 'Menjalankan OCR lokal<span class="button-spinner" aria-hidden="true"></span>';
-    byId("result-document").textContent = "Gambar lokal";
-    byId("result-kind").textContent = "MEMPROSES";
-    byId("result-status").textContent = "Inferensi berlangsung di laptop ini. Gambar tidak dikirim ke hosting.";
+    runLocalButton.innerHTML = 'Running local OCR<span class="button-spinner" aria-hidden="true"></span>';
+    byId("result-document").textContent = "Image from this computer";
+    byId("result-kind").textContent = "PROCESSING";
+    byId("result-status").textContent = "Inference is running on this computer. The image is not sent to the public host.";
     const requestBody = new FormData();
     requestBody.append("file", selectedFile, selectedFile.name);
     const controller = new AbortController();
@@ -332,35 +332,35 @@ if (document.body.hasAttribute("data-simulation")) {
         signal: controller.signal,
       });
       const payload = await response.json().catch(() => ({}));
-      if (!response.ok) throw new Error(payload.detail || "Pipeline lokal gagal memproses gambar.");
+      if (!response.ok) throw new Error(payload.detail || "The local pipeline could not process the image.");
 
       const object = payload.object ?? {};
       const fields = [
-        ["nama", object.nama],
-        ["tanggal_lahir", object.tanggal_lahir],
-        ["alamat", object.alamat],
+        ["name", object.name],
+        ["date_of_birth", object.date_of_birth],
+        ["address", object.address],
       ];
-      const elapsed = Number.isFinite(payload.elapsed_ms) ? `${Math.round(payload.elapsed_ms)} ms` : "selesai";
+      const elapsed = Number.isFinite(payload.elapsed_ms) ? Math.round(payload.elapsed_ms) + " ms" : "complete";
       setResult({
-        documentLabel: "Gambar dari perangkat ini",
-        kind: "OCR LOKAL",
-        kicker: "HASIL INFERENSI LOKAL",
-        title: "Object hasil ekstraksi",
+        documentLabel: "Image from this computer",
+        kind: "LOCAL OCR",
+        kicker: "LOCAL INFERENCE RESULT",
+        title: "Extracted object",
         fields,
         object,
-        status: `${payload.model_label} · ${payload.preprocessing?.mode ?? "raw"} · ${elapsed} · berjalan di perangkat ini`,
+        status: payload.model_label + " · " + (payload.preprocessing?.mode ?? "raw") + " · " + elapsed + " · running on this computer",
       });
-      showToast("Inferensi lokal selesai.");
+      showToast("Local inference complete.");
     } catch (error) {
       const message = error.name === "AbortError"
-        ? "Waktu inferensi melewati 5 menit. Coba gambar yang lebih kecil atau profil model lebih ringan."
+        ? "Inference exceeded 5 minutes. Try a smaller image or a lighter model profile."
         : error.message;
-      byId("result-kind").textContent = "BELUM SELESAI";
+      byId("result-kind").textContent = "INCOMPLETE";
       byId("result-status").textContent = message;
       showToast(message);
     } finally {
       window.clearTimeout(timeout);
-      runLocalButton.innerHTML = 'Jalankan OCR di laptop <span aria-hidden="true">↗</span>';
+      runLocalButton.innerHTML = 'Run OCR locally <span aria-hidden="true">↗</span>';
       refreshRunButton();
     }
   });
@@ -368,9 +368,9 @@ if (document.body.hasAttribute("data-simulation")) {
   byId("copy-result").addEventListener("click", async () => {
     try {
       await navigator.clipboard.writeText(JSON.stringify(lastObject, null, 2));
-      showToast("Object JSON disalin.");
+      showToast("JSON object copied.");
     } catch {
-      showToast("Clipboard tidak tersedia pada konteks ini.");
+      showToast("The clipboard is unavailable in this context.");
     }
   });
 

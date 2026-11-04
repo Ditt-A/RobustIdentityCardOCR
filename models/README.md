@@ -1,23 +1,23 @@
-# Model OCR lokal
+# Local OCR models
 
-Tidak ada weights yang disertakan di folder repo. Simpan model PaddleOCR dalam format inference lokal di folder profil yang dipilih:
+Model weights are not included in this repository. Place PaddleOCR inference models in the folder for the profile you want to use:
 
-- `PP-OCRv6_tiny_det/` dan `PP-OCRv6_tiny_rec/`
-- `PP-OCRv6_small_det/` dan `PP-OCRv6_small_rec/` (profil default)
-- `PP-OCRv6_medium_det/` dan `PP-OCRv6_medium_rec/`
+- PP-OCRv6_tiny_det/ and PP-OCRv6_tiny_rec/
+- PP-OCRv6_small_det/ and PP-OCRv6_small_rec/ (default profile)
+- PP-OCRv6_medium_det/ and PP-OCRv6_medium_rec/
 
-Setiap folder perlu berisi file inference Paddle yang cocok, termasuk parameter `.pdiparams` dan graph `inference.pdmodel` atau `inference.json`. Pilih profil dengan variabel PowerShell `OCR_PROFILE` sebelum menjalankan `start-local.ps1`.
+Each folder must contain compatible Paddle inference files, including a parameter file such as .pdiparams and a graph file named inference.pdmodel or inference.json. Select a profile with the PowerShell OCR_PROFILE variable before starting start-local.ps1.
 
-Unduh model inference dari tautan resmi di [daftar model PaddleOCR](https://www.paddleocr.ai/latest/version3.x/model_list.html) atau panduan [pipeline OCR](https://www.paddleocr.ai/main/en/version3.x/pipeline_usage/OCR.html). Letakkan weights di laptop sendiri. Runner tidak mengunduh model otomatis.
+Download inference models from the official [PaddleOCR model list](https://www.paddleocr.ai/latest/version3.x/model_list.html) or see the [OCR pipeline guide](https://www.paddleocr.ai/main/en/version3.x/pipeline_usage/OCR.html). Store the weights on your own computer. The runner does not download models automatically.
 
-Contoh mengganti profil:
+Example profile configuration:
 
-```powershell
+~~~powershell
 $env:OCR_MODEL_ROOT = 'D:\OCR\models'
 $env:OCR_PROFILE = 'tiny'
 & '.\local_runner\start-local.ps1'
-```
+~~~
 
-Profil yang tersedia: `tiny`, `small`, dan `medium`. `small` menjadi default untuk menjaga kebutuhan perangkat lebih rendah. Pastikan direktori detector dan recognizer berasal dari profil yang sama.
+Available profiles are tiny, small, and medium. The default is small to reduce hardware requirements. Make sure the detector and recognizer directories come from the same profile.
 
-Path individual juga bisa diganti melalui `OCR_DET_MODEL_DIR` dan `OCR_REC_MODEL_DIR` jika bobot detector dan recognizer disimpan di lokasi berbeda.
+You can also set OCR_DET_MODEL_DIR and OCR_REC_MODEL_DIR to use detector and recognizer weights stored in different locations.
