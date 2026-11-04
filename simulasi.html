@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#F5F7FA" />
+    <meta name="description" content="Overview sampel dataset identitas dan OCR lokal yang dijalankan langsung di laptop." />
+    <title>Simulasi OCR — VeriID</title>
+    <link rel="icon" type="image/svg+xml" href="assets/logo-mark.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="app.js" defer></script>
+  </head>
+  <body class="simulation-page" data-simulation>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="index.html" aria-label="VeriID beranda">
+          <img class="brand-mark" src="assets/logo-mark.svg" alt="" width="40" height="40" />
+          <span class="brand-name">Veri<span>ID</span></span>
+          <span class="brand-divider" aria-hidden="true"></span>
+          <span class="brand-caption">DOCUMENT OCR</span>
+        </a>
+        <a class="button button-small button-quiet" href="index.html"><span aria-hidden="true">←</span> Kembali ke beranda</a>
+      </div>
+    </header>
+
+    <main class="sim-main">
+      <div class="container">
+        <nav class="sim-breadcrumb" aria-label="Breadcrumb"><a href="index.html">Beranda</a><span aria-hidden="true">/</span><b>Simulasi OCR</b></nav>
+        <div class="sim-heading">
+          <div><p class="eyebrow"><span class="eyebrow-dot"></span> WORKSPACE · OCR DOKUMEN</p><h1>Simulasi OCR dokumen</h1><p>Pilih overview dataset atau jalankan pipeline OCR di laptop sendiri.</p></div>
+          <span class="prototype-badge"><span aria-hidden="true"></span> 2 MODE</span>
+        </div>
+
+        <div class="mode-switch" role="tablist" aria-label="Pilih mode simulasi">
+          <button class="mode-tab is-selected" id="mode-tab-overview" type="button" role="tab" aria-selected="true" aria-controls="overview-panel" data-mode-choice="overview">
+            <span class="mode-number">01</span><span><b>Overview</b><small>Sampel dataset dan contoh object</small></span><span class="mode-arrow" aria-hidden="true">↗</span>
+          </button>
+          <button class="mode-tab" id="mode-tab-local" type="button" role="tab" aria-selected="false" aria-controls="local-panel" data-mode-choice="local">
+            <span class="mode-number">02</span><span><b>Jalankan lokal</b><small>Upload gambar dan proses di laptop</small></span><span class="mode-arrow" aria-hidden="true">↗</span>
+          </button>
+        </div>
+
+        <div class="demo-notice" id="mode-notice"><span class="notice-icon" aria-hidden="true">i</span><div><b id="notice-title">Overview · sampel dataset asli</b><span id="notice-copy">Teks identitas dan area foto disamarkan. JSON yang terlihat adalah placeholder; model OCR tidak dijalankan pada mode ini.</span></div><span class="notice-tag" id="notice-tag">DATASET DRIVE</span></div>
+
+        <div class="simulation-layout">
+          <div class="sim-workspace">
+            <section class="sim-panel" id="overview-panel" role="tabpanel" aria-labelledby="mode-tab-overview" data-mode-panel="overview">
+              <div class="panel-heading"><span class="panel-step">01</span><div><h2>Pilih sampel overview</h2><p>Semua gambar berasal dari folder Drive yang Anda berikan.</p></div></div>
+              <div class="choice-grid" role="group" aria-label="Pilih gambar sampel dataset">
+                <button class="choice-card is-selected" type="button" data-sample-choice="001" aria-pressed="true">
+                  <span class="choice-check" aria-hidden="true">✓</span><img src="assets/dataset-001-redacted.jpg" alt="Sampel image_001 yang disamarkan" /><b>image_001.jpg</b><small>Sampel dataset</small>
+                </button>
+                <button class="choice-card" type="button" data-sample-choice="150" aria-pressed="false">
+                  <span class="choice-check" aria-hidden="true">✓</span><img src="assets/dataset-150-redacted.jpg" alt="Sampel image_150 yang disamarkan" /><b>image_150.jpg</b><small>Sampel dataset</small>
+                </button>
+                <button class="choice-card" type="button" data-sample-choice="300" aria-pressed="false">
+                  <span class="choice-check" aria-hidden="true">✓</span><img src="assets/dataset-300-redacted.jpg" alt="Sampel image_300 yang disamarkan" /><b>image_300.jpg</b><small>Sampel dataset</small>
+                </button>
+              </div>
+              <div class="sample-stage" id="sample-stage">
+                <img class="sample-art" id="sample-art" src="assets/dataset-001-redacted.jpg" alt="Foto sampel image_001 dari dataset Drive dengan detail identitas disamarkan" />
+                <span class="sample-corner sample-corner-tl" aria-hidden="true"></span><span class="sample-corner sample-corner-tr" aria-hidden="true"></span>
+                <span class="sample-corner sample-corner-bl" aria-hidden="true"></span><span class="sample-corner sample-corner-br" aria-hidden="true"></span>
+                <span class="sample-scan-line" aria-hidden="true"></span>
+                <span class="sample-stage-caption"><span class="tiny-dot"></span><span id="sample-caption">DRIVE · image_001.jpg · detail disamarkan</span></span>
+              </div>
+              <div class="route-summary"><span class="route-summary-icon" aria-hidden="true">▧</span><div><b id="route-summary-title">Sampel dataset 001</b><span id="route-summary-detail">Satu foto berlabel dari folder Drive. Jenis dokumen tidak ditebak.</span></div><span class="route-summary-tag">OVERVIEW</span></div>
+              <button class="button button-primary run-button" id="run-overview" type="button">Tampilkan object overview <span aria-hidden="true">↗</span></button>
+            </section>
+
+            <section class="sim-panel local-panel" id="local-panel" role="tabpanel" aria-labelledby="mode-tab-local" data-mode-panel="local" hidden>
+              <div class="panel-heading"><span class="panel-step">02</span><div><h2>OCR dijalankan di perangkat</h2><p>Pilih gambar lalu mulai pipeline secara manual.</p></div></div>
+              <div class="local-health" id="local-health" role="status" aria-live="polite">
+                <span class="health-indicator" aria-hidden="true"></span><div><b id="local-health-title">Memeriksa local runner</b><span id="local-health-detail">Model tidak akan dimuat sebelum Anda menjalankan OCR.</span></div>
+              </div>
+              <label class="upload-zone" for="local-image">
+                <span class="upload-icon" aria-hidden="true">↑</span><b>Pilih foto dokumen</b><span>JPG, PNG, atau WebP · maks 8 MB dan 6 megapiksel</span>
+                <input id="local-image" name="image" type="file" accept="image/jpeg,image/png,image/webp" />
+              </label>
+              <div class="local-file-preview" id="local-file-preview" hidden>
+                <img id="local-preview" alt="Pratinjau gambar yang dipilih dari perangkat ini" />
+                <div><b id="local-file-name"></b><span id="local-file-size"></span></div>
+                <button class="text-button" id="clear-local-file" type="button">Hapus</button>
+              </div>
+              <div class="local-model-info">
+                <div class="local-model-heading"><b>Model lokal</b><span>PATH DI LAPTOP</span></div>
+                <code id="det-model-path">models/PP-OCRv6_small_det/</code>
+                <code id="rec-model-path">models/PP-OCRv6_small_rec/</code>
+                <p>Runner ini baseline PP-OCRv6. Weights tidak termasuk di repo, dan hasilnya bukan reproduksi model V28. Letakkan model PaddleOCR di path ini atau ubah variabel konfigurasi backend.</p>
+              </div>
+              <button class="button button-primary run-button" id="run-local-ocr" type="button" disabled>Jalankan OCR di laptop <span aria-hidden="true">↗</span></button>
+              <p class="local-runner-hint" id="local-runner-hint">Mode lokal hanya tersedia di <code>127.0.0.1:8787</code>. Setup dependency, siapkan weights, lalu jalankan local runner.</p>
+            </section>
+          </div>
+
+          <aside class="result-panel" aria-live="polite" aria-labelledby="result-title">
+            <div class="result-top">
+              <div><span class="result-kicker"><span class="result-dot"></span> <span id="result-kicker">OUTPUT OVERVIEW</span></span><h2 id="result-title">Object contoh</h2></div>
+              <button class="copy-button" id="copy-result" type="button" aria-label="Salin object JSON" title="Salin JSON"><svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><rect x="7" y="7" width="10" height="10" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M13 7V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2" stroke="currentColor" stroke-width="1.6"/></svg></button>
+            </div>
+            <div class="result-meta"><span id="result-document">Sampel dataset 001</span><span class="synthetic-pill" id="result-kind">PLACEHOLDER</span></div>
+            <div class="field-preview" id="field-preview"></div>
+            <div class="json-heading"><span>OBJECT JSON</span><span>application/json</span></div>
+            <pre class="json-output"><code id="json-output"></code></pre>
+            <div class="result-foot"><span class="foot-check" aria-hidden="true">i</span><span id="result-status">Placeholder overview · model OCR belum dijalankan</span></div>
+          </aside>
+        </div>
+
+        <div class="sim-bottom-row"><span><b>Privasi:</b> asset sampel yang tersimpan di web sudah disamarkan. Gambar mode lokal hanya dikirim ke API loopback pada perangkat ini.</span><a href="index.html#metode">Tinjau pipeline OCR <span aria-hidden="true">↗</span></a></div>
+      </div>
+    </main>
+
+    <dialog class="local-mode-dialog" id="local-mode-dialog" aria-labelledby="local-dialog-title">
+      <div class="dialog-mark" aria-hidden="true">↗</div>
+      <p class="eyebrow">MODE OCR LOKAL</p>
+      <h2 id="local-dialog-title">Model akan berjalan di laptopmu.</h2>
+      <p>Gambar diproses oleh backend di perangkat ini (<code>127.0.0.1</code>), bukan di server online. Halaman ini tidak mengirim gambar ke cloud.</p>
+      <ul>
+        <li>Model dimuat saat OCR pertama kali dijalankan, dengan CPU dan batas gambar 6 megapiksel.</li>
+        <li>Weights tidak disertakan; kamu perlu menyiapkan model di folder lokal.</li>
+        <li>Runner memakai baseline PP-OCRv6; weights khusus V28/SVTRv2 tidak tersedia di repo publik.</li>
+        <li>Gambar dipakai sementara selama inferensi lalu dihapus.</li>
+      </ul>
+      <div class="dialog-actions"><button class="button button-quiet" id="cancel-local-mode" type="button">Kembali</button><button class="button button-primary" id="confirm-local-mode" type="button">Lanjut ke mode lokal</button></div>
+    </dialog>
+
+    <div class="toast-message" id="toast-message" role="status" aria-live="polite"></div>
+    <footer class="site-footer"><div class="container footer-inner"><a class="brand footer-brand" href="index.html"><img class="brand-mark" src="assets/logo-mark.svg" alt="" width="32" height="32" /><span class="brand-name">Veri<span>ID</span></span></a><span>Overview dataset · OCR lokal</span><a href="index.html">Kembali ke landing page <span aria-hidden="true">↗</span></a></div></footer>
+  </body>
+</html>

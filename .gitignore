@@ -1,8 +1,8 @@
 # Local identity data and original unredacted submissions
 private/
-experiments/results*/
-experiments/reference_outputs/
-experiments/reports/
+archived/experiments/results*/
+archived/experiments/reference_outputs/
+archived/experiments/reports/
 data/images/
 data/ground_truth.*
 
@@ -24,3 +24,9 @@ venv/
 *.zip
 *.tar.gz
 .DS_Store
+
+# Downloaded PaddleOCR inference weights (keep them local)
+models/**/*.pdparams
+models/**/*.pdiparams
+models/**/*.pdmodel
+models/**/inference.json

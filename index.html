@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#F6F7F9" />
+    <meta name="description" content="Pratinjau OCR dokumen identitas dengan sampel dataset yang disamarkan dan opsi pemrosesan lokal." />
+    <title>VeriID — OCR Dokumen Identitas</title>
+    <link rel="icon" type="image/svg+xml" href="assets/logo-mark.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="landing.css" />
+  </head>
+  <body class="landing-page">
+    <header class="lp-header">
+      <div class="lp-shell lp-header-inner">
+        <a class="lp-brand" href="index.html" aria-label="VeriID beranda">
+          <img src="assets/logo-mark.svg" alt="" width="38" height="38" />
+          <span>Veri<span class="lp-brand-accent">ID</span></span>
+          <span class="lp-brand-rule" aria-hidden="true"></span>
+          <small>DOCUMENT OCR</small>
+        </a>
+        <nav class="lp-nav" aria-label="Navigasi utama">
+          <a href="#sampel">Sampel data</a>
+          <a href="#metode">Cara kerja</a>
+          <a href="#bukti">Benchmark</a>
+        </nav>
+        <a class="lp-button lp-button-small" href="simulasi.html">Coba simulator <span aria-hidden="true">↗</span></a>
+      </div>
+    </header>
+
+    <main>
+      <section class="lp-hero">
+        <div class="lp-shell lp-hero-grid">
+          <div class="lp-hero-copy">
+            <p class="lp-eyebrow"><span class="lp-eyebrow-mark" aria-hidden="true"></span> OCR DOKUMEN IDENTITAS <span class="lp-eyebrow-separator">/</span> PROTOTIPE</p>
+            <h1>Dokumen jadi <span>data yang siap ditinjau.</span></h1>
+            <p class="lp-hero-description">Jelajahi OCR berbasis foto asli dataset, lihat struktur hasilnya, dan jalankan baseline secara lokal di perangkat Anda.</p>
+            <div class="lp-actions">
+              <a class="lp-button lp-button-primary" href="simulasi.html">Coba simulator <span aria-hidden="true">↗</span></a>
+              <a class="lp-text-link" href="#metode">Lihat cara kerja <span aria-hidden="true">↓</span></a>
+            </div>
+            <div class="lp-hero-assurances">
+              <span><i class="lp-check" aria-hidden="true">✓</i> Sampel dataset asli</span>
+              <span><i class="lp-check" aria-hidden="true">✓</i> Pemrosesan model di laptop</span>
+            </div>
+          </div>
+
+          <div class="lp-hero-visual" aria-label="Contoh foto dataset dan bentuk object hasil overview">
+            <div class="lp-sample-window">
+              <div class="lp-window-bar">
+                <div class="lp-window-title"><span class="lp-window-dot" aria-hidden="true"></span><span>CONTOH DATASET</span></div>
+                <span class="lp-window-file">image_001.jpg</span>
+              </div>
+              <figure class="lp-hero-image">
+                <img src="assets/dataset-001-redacted.jpg" alt="Foto asli dari dataset, dengan foto wajah dan nilai identitas disamarkan" />
+              </figure>
+              <div class="lp-window-foot">
+                <span><span class="lp-mini-lock" aria-hidden="true">⌑</span> Data personal disamarkan</span>
+                <span>01 / 03</span>
+              </div>
+            </div>
+            <div class="lp-output-card">
+              <div class="lp-output-heading">
+                <div><span class="lp-output-kicker">OVERVIEW</span><strong>Struktur output</strong></div>
+                <span class="lp-json-mark">{ }</span>
+              </div>
+              <dl class="lp-output-fields">
+                <div><dt>nama</dt><dd><span class="lp-redacted-value">disamarkan</span></dd></div>
+                <div><dt>tanggal_lahir</dt><dd><span class="lp-redacted-value">disamarkan</span></dd></div>
+                <div><dt>alamat</dt><dd><span class="lp-redacted-value">disamarkan</span></dd></div>
+              </dl>
+              <div class="lp-output-foot"><span class="lp-status-dot" aria-hidden="true"></span> Placeholder · bukan hasil inferensi</div>
+            </div>
+            <span class="lp-hero-index" aria-hidden="true">VERIID / 01</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="lp-benchmark" id="bukti">
+        <div class="lp-shell">
+          <div class="lp-benchmark-heading">
+            <div>
+              <p class="lp-eyebrow lp-eyebrow-light">HASIL EVALUASI REPOSITORY</p>
+              <h2>Performa ditampilkan dengan konteks.</h2>
+            </div>
+            <p>Snapshot benchmark V28 pada data berlabel. Angka ini membantu menetapkan baseline; bukan klaim performa produksi.</p>
+          </div>
+          <div class="lp-metrics">
+            <article class="lp-metric lp-metric-count"><span>GAMBAR EVALUASI</span><strong>632</strong><small>data berlabel</small></article>
+            <article class="lp-metric"><span>NAME EXACT MATCH</span><strong>46.20<em>%</em></strong><small>kecocokan nama persis</small></article>
+            <article class="lp-metric"><span>DOB EXACT MATCH</span><strong>70.41<em>%</em></strong><small>kecocokan tanggal lahir</small></article>
+            <article class="lp-metric"><span>FULL RECORD</span><strong>37.66<em>%</em></strong><small>semua field cocok persis</small></article>
+          </div>
+          <div class="lp-benchmark-note">
+            <p><strong>Catatan alamat.</strong> Skor exact-match 83.70% menghitung baris berlabel alamat kosong. Laporan V27 mencatat 25.0% pada 112 baris yang memiliki alamat.</p>
+            <a href="https://github.com/Ditt-A/RobustIdentityCardOCR/blob/main/reports/metrics/v28.json" target="_blank" rel="noreferrer">Lihat metrik dan metodologi ↗</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="lp-samples" id="sampel">
+        <div class="lp-shell">
+          <div class="lp-section-heading">
+            <div>
+              <p class="lp-eyebrow">DATASET ASLI · PRIVASI DIJAGA</p>
+              <h2>Contoh data kerja, bukan ilustrasi.</h2>
+            </div>
+            <p>Tiga foto dipilih dari folder Drive yang Anda berikan. Foto wajah dan nilai identitas disamarkan; jenis dokumen tidak ditebak.</p>
+          </div>
+          <div class="lp-sample-grid">
+            <a class="lp-sample-card" href="simulasi.html?sample=001">
+              <div class="lp-sample-image lp-sample-image-tall"><img src="assets/dataset-001-redacted.jpg" alt="Sampel image_001 dari dataset, dengan wajah dan nilai identitas disamarkan" loading="lazy" /></div>
+              <div class="lp-sample-card-foot"><span><small>SAMPEL 001</small><strong>image_001.jpg</strong></span><b aria-hidden="true">↗</b></div>
+            </a>
+            <a class="lp-sample-card" href="simulasi.html?sample=150">
+              <div class="lp-sample-image"><img src="assets/dataset-150-redacted.jpg" alt="Sampel image_150 dari dataset, dengan wajah dan nilai identitas disamarkan" loading="lazy" /></div>
+              <div class="lp-sample-card-foot"><span><small>SAMPEL 150</small><strong>image_150.jpg</strong></span><b aria-hidden="true">↗</b></div>
+            </a>
+            <a class="lp-sample-card" href="simulasi.html?sample=300">
+              <div class="lp-sample-image"><img src="assets/dataset-300-redacted.jpg" alt="Sampel image_300 dari dataset, dengan wajah dan nilai identitas disamarkan" loading="lazy" /></div>
+              <div class="lp-sample-card-foot"><span><small>SAMPEL 300</small><strong>image_300.jpg</strong></span><b aria-hidden="true">↗</b></div>
+            </a>
+          </div>
+          <div class="lp-sample-caption"><span class="lp-caption-rule" aria-hidden="true"></span> Foto dan sebagian field tetap terlihat agar karakter data sumber dapat ditinjau.</div>
+        </div>
+      </section>
+
+      <section class="lp-method" id="metode">
+        <div class="lp-shell">
+          <div class="lp-section-heading lp-method-heading">
+            <div>
+              <p class="lp-eyebrow">PIPELINE YANG TERCATAT DI REPO</p>
+              <h2>Langkah yang jelas, dari gambar ke field.</h2>
+            </div>
+            <p>Alur merangkum diagram arsitektur proyek. Demo lokal menyediakan baseline OCR yang bisa dijalankan pada perangkat pengguna.</p>
+          </div>
+
+          <ol class="lp-flow">
+            <li><span class="lp-step-number">01</span><div><h3>Nilai gambar</h3><p>Periksa mutu input untuk memilih jalur pemrosesan.</p></div></li>
+            <li><span class="lp-step-number">02</span><div><h3>Siapkan teks</h3><p>Prapemrosesan adaptif: raw, grayscale, atau CLAHE.</p></div></li>
+            <li><span class="lp-step-number">03</span><div><h3>Baca dokumen</h3><p>Deteksi area teks, lalu kenali isi dengan OCR.</p></div></li>
+            <li><span class="lp-step-number">04</span><div><h3>Susun hasil</h3><p>Rutekan bukti teks menjadi field terstruktur untuk ditinjau.</p></div></li>
+          </ol>
+
+          <div class="lp-preprocess">
+            <div class="lp-preprocess-intro">
+              <span class="lp-deployment-label">SATU SAMPEL · VARIASI PRA-PEMROSESAN</span>
+              <h3>Input yang sama, jalur persiapan yang berbeda.</h3>
+              <p>Perbandingan visual dari sampel yang sama. Mode dipilih berdasarkan kondisi gambar; bukan tiga hasil OCR yang terpisah.</p>
+            </div>
+            <div class="lp-preprocess-grid">
+              <figure><div><img src="assets/pipeline-raw-redacted.jpg" alt="Sampel asli yang sudah disamarkan" loading="lazy" /></div><figcaption><small>01</small><span>Raw</span></figcaption></figure>
+              <figure><div><img src="assets/pipeline-grayscale-redacted.jpg" alt="Versi grayscale dari sampel yang sudah disamarkan" loading="lazy" /></div><figcaption><small>02</small><span>Grayscale</span></figcaption></figure>
+              <figure><div><img src="assets/pipeline-clahe-redacted.jpg" alt="Versi CLAHE dari sampel yang sudah disamarkan" loading="lazy" /></div><figcaption><small>03</small><span>CLAHE</span></figcaption></figure>
+            </div>
+          </div>
+
+          <div class="lp-deployment-note">
+            <div class="lp-deployment-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M4 6.5A2.5 2.5 0 0 1 6.5 4h11A2.5 2.5 0 0 1 20 6.5v7a2.5 2.5 0 0 1-2.5 2.5h-11A2.5 2.5 0 0 1 4 13.5v-7Z" stroke="currentColor" stroke-width="1.6"/><path d="M8 20h8m-4-4v4m-4-9 2.2-2.2a1.2 1.2 0 0 1 1.7 0L14 10.5l1.3-1.3a1.2 1.2 0 0 1 1.7 0L18 10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div class="lp-deployment-copy">
+              <span class="lp-deployment-label">JALANKAN DI PERANGKAT ANDA</span>
+              <h3>Gambar tetap di laptop saat memakai mode lokal.</h3>
+              <p>Runner web lokal memakai PP-OCRv6 sebagai baseline CPU. Bobot V28/SVTRv2 Server tidak disertakan di repo publik, jadi mode ini bukan reproduksi model atau skor V28.</p>
+            </div>
+            <a class="lp-button lp-button-outline" href="simulasi.html">Pilih mode di simulator <span aria-hidden="true">↗</span></a>
+          </div>
+        </div>
+      </section>
+
+      <section class="lp-final">
+        <div class="lp-shell lp-final-inner">
+          <div>
+            <p class="lp-eyebrow lp-eyebrow-light">LIHAT SIMULASINYA</p>
+            <h2>Mulai dari satu sampel. Tinjau alurnya sendiri.</h2>
+            <p>Pilih overview untuk pratinjau object, atau jalankan OCR lokal di laptop.</p>
+          </div>
+          <a class="lp-button lp-button-light" href="simulasi.html">Buka simulator <span aria-hidden="true">↗</span></a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="lp-footer">
+      <div class="lp-shell lp-footer-inner">
+        <a class="lp-brand" href="index.html" aria-label="VeriID beranda">
+          <img src="assets/logo-mark.svg" alt="" width="32" height="32" />
+          <span>Veri<span class="lp-brand-accent">ID</span></span>
+        </a>
+        <span>OCR dokumen identitas · Prototype</span>
+        <a href="simulasi.html">Simulator <span aria-hidden="true">↗</span></a>
+      </div>
+    </footer>
+  </body>
+</html>
