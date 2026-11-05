@@ -2,7 +2,7 @@
 
 VeriID is a deployable static website for exploring redacted identity-document samples and a local OCR baseline. The overview simulator shows a placeholder result; OCR inference is available only through the local runner on the user's computer.
 
-![VeriID landing page](screenshots/landing-page.png)
+![VeriID landing page preview](screenshots/landing-page.png)
 
 ## Deploy the static website
 
@@ -35,41 +35,33 @@ See [models/README.md](models/README.md) for model paths and profile options. St
 
 Open http://127.0.0.1:8787, choose **Run locally**, and upload an image. The image is sent only to the loopback API on that computer. The public website does not receive OCR uploads. The model is loaded on the first OCR request.
 
-## Architecture
+## OCR model pipeline architecture
 
-The public site provides the landing page and a sample-only overview. The local runner serves the same app on the user's computer and exposes the OCR API there. The diagram shows the local inference and data boundary.
+This diagram focuses on the document-understanding model pipeline, from image assessment through structured field extraction.
 
 ~~~mermaid
-flowchart TD
-    Visitor["Visitor"] --> PublicSite["Public static host<br/>Landing page and simulator"]
-    PublicSite --> Overview["Overview mode<br/>Redacted sample assets + placeholder JSON"]
-    Overview --> Placeholder["Placeholder JSON only<br/>No OCR inference"]
+flowchart LR
+    Input["Identity document image"] --> Quality["Image quality assessment"]
+    Quality --> Preprocess{"Adaptive preprocessing"}
+    Preprocess -->|"Standard image"| Raw["Raw image"]
+    Preprocess -->|"Low color variation"| Grayscale["Grayscale"]
+    Preprocess -->|"Low contrast or extreme brightness"| CLAHE["Grayscale + CLAHE"]
 
-    Visitor --> LocalSite["Local VeriID app<br/>127.0.0.1:8787"]
-    LocalSite --> Browser["Browser on the user's computer"]
-    Browser -->|"POST /api/ocr after the user starts OCR"| API["FastAPI local runner<br/>Loopback only"]
-    Browser -->|"GET /api/health"| API
+    Raw --> Detection["Text detection<br/>PP-OCRv6 Medium"]
+    Grayscale --> Detection
+    CLAHE --> Detection
+    Detection --> Recognition["Text recognition<br/>OpenOCR SVTRv2 Server"]
+    Recognition --> Evidence["OCR evidence<br/>Text · confidence · geometry"]
+    Evidence --> Routing["Evidence-driven routing<br/>Text · layout · MRZ cues"]
+    Routing --> Extraction["Specialist field extraction<br/>Route-specific logic"]
+    Extraction --> Output["Structured fields<br/>Name · date of birth · address"]
 
-    API --> Validate["Validate file type, size, and image dimensions"]
-    Validate --> Assess["Assess image quality"]
-    Assess --> Route{"Preprocessing route"}
-    Route -->|"Normal color"| Raw["Keep RGB image"]
-    Route -->|"Low color variation"| Gray["Convert to grayscale"]
-    Route -->|"Low contrast or extreme brightness"| CLAHE["Grayscale + CLAHE"]
-    Raw --> OCR["PP-OCRv6 detector and recognizer<br/>CPU inference"]
-    Gray --> OCR
-    CLAHE --> OCR
-    Weights[("Local detector and recognizer weights<br/>not tracked by Git")] --> OCR
-    OCR --> Extract["Extract explicitly labeled fields<br/>and retain recognized text"]
-    Extract --> Result["Structured JSON result"]
-    Result -->|"Loopback response"| Browser
-
-    classDef public fill:#eef3ff,stroke:#5374bd,color:#17233a
-    classDef local fill:#edf8f3,stroke:#3d8568,color:#172b22
-    classDef data fill:#fff7e8,stroke:#b7812b,color:#382b17
-    class PublicSite,Overview,Placeholder public
-    class LocalSite,Browser,API,Validate,Assess,Route,Raw,Gray,CLAHE,OCR,Extract,Result local
-    class Weights data
+    classDef image fill:#eef3ff,stroke:#5374bd,color:#17233a
+    classDef model fill:#edf8f3,stroke:#3d8568,color:#172b22
+    classDef output fill:#fff7e8,stroke:#b7812b,color:#382b17
+    class Input image
+    class Quality,Preprocess,Raw,Grayscale,CLAHE,Detection,Recognition,Evidence,Routing,Extraction model
+    class Output output
 ~~~
 
 ## Method and limitations
