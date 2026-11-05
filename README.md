@@ -100,3 +100,5 @@ archived/                       V3–V28 experiments, notebooks, scripts, and re
 The contents of archived/ are retained for provenance. They are not required to serve the website or run the local OCR baseline.
 
 The landing page combines real redacted dataset previews with a decorative generated workspace photograph. See the [visual asset notes](docs/visual-assets.md) for the image source and generation prompt.
+
+Shared font sizes and text colors are defined in [tokens.css](tokens.css). See the [typography and contrast audit](docs/typography-contrast.md) for the reading hierarchy, measured color pairs, and browser checks.

@@ -1,0 +1,17 @@
+/* Shared reading scale and text colors for the product site and OCR workspace. */
+:root {
+  font-size: 100%;
+  --color-ink: #14263B;
+  --color-text: var(--color-ink);
+  --color-muted: var(--color-ink);
+  --color-action: #315CF5;
+  --color-action-hover: #2348D8;
+  --text-meta: .75rem;
+  --text-caption: .8125rem;
+  --text-small: .875rem;
+  --text-body: 1rem;
+  --text-lead: 1.125rem;
+  --text-card: 1.25rem;
+  --font-sans: 'Manrope', 'Segoe UI', sans-serif;
+  --font-mono: 'IBM Plex Mono', Consolas, monospace;
+}
