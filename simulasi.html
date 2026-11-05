@@ -30,7 +30,7 @@
       <div class="container">
         <nav class="sim-breadcrumb" aria-label="Breadcrumb"><a href="index.html">Home</a><span aria-hidden="true">/</span><b>OCR Simulator</b></nav>
         <div class="sim-heading">
-          <div><p class="eyebrow"><span class="eyebrow-dot"></span> WORKSPACE · DOCUMENT OCR</p><h1>Document OCR simulator</h1><p>Explore dataset samples or run the OCR pipeline on your computer.</p></div>
+          <div><p class="eyebrow"><span class="eyebrow-dot"></span> VERIID · DOCUMENT INTELLIGENCE</p><h1>Your OCR workspace</h1><p>Explore a sample or extract structured fields from your own document locally.</p></div>
           <span class="prototype-badge"><span aria-hidden="true"></span> 2 MODES</span>
         </div>
 
@@ -43,12 +43,12 @@
           </button>
         </div>
 
-        <div class="demo-notice" id="mode-notice"><span class="notice-icon" aria-hidden="true">i</span><div><b id="notice-title">Overview · real dataset samples</b><span id="notice-copy">Faces and selected identity values are redacted. The JSON shown is a placeholder; OCR does not run in this mode.</span></div><span class="notice-tag" id="notice-tag">DRIVE DATASET</span></div>
+        <div class="demo-notice" id="mode-notice"><span class="notice-icon" aria-hidden="true">i</span><div><b id="notice-title">Overview · real dataset samples</b><span id="notice-copy">Faces and selected identity values are redacted. The JSON shown is a placeholder; OCR does not run in this mode.</span></div><span class="notice-tag" id="notice-tag">SOURCE DATASET</span></div>
 
         <div class="simulation-layout">
           <div class="sim-workspace">
             <section class="sim-panel" id="overview-panel" role="tabpanel" aria-labelledby="mode-tab-overview" data-mode-panel="overview">
-              <div class="panel-heading"><span class="panel-step">01</span><div><h2>Choose an overview sample</h2><p>All images come from the Drive folder you provided.</p></div></div>
+              <div class="panel-heading"><span class="panel-step">01</span><div><h2>Choose a source document</h2><p>Three original dataset images, with sensitive details redacted.</p></div></div>
               <div class="choice-grid" role="group" aria-label="Choose a dataset sample image">
                 <button class="choice-card is-selected" type="button" data-sample-choice="001" aria-pressed="true">
                   <span class="choice-check" aria-hidden="true">✓</span><img src="assets/dataset-001-redacted.jpg" alt="Redacted sample image_001" /><b>image_001.jpg</b><small>Dataset sample</small>
@@ -65,9 +65,9 @@
                 <span class="sample-corner sample-corner-tl" aria-hidden="true"></span><span class="sample-corner sample-corner-tr" aria-hidden="true"></span>
                 <span class="sample-corner sample-corner-bl" aria-hidden="true"></span><span class="sample-corner sample-corner-br" aria-hidden="true"></span>
                 <span class="sample-scan-line" aria-hidden="true"></span>
-                <span class="sample-stage-caption"><span class="tiny-dot"></span><span id="sample-caption">DRIVE · image_001.jpg · selected details redacted</span></span>
+                <span class="sample-stage-caption"><span class="tiny-dot"></span><span id="sample-caption">DATASET · image_001.jpg · selected details redacted</span></span>
               </div>
-              <div class="route-summary"><span class="route-summary-icon" aria-hidden="true">▧</span><div><b id="route-summary-title">Dataset sample 001</b><span id="route-summary-detail">One labeled photo from the Drive folder. The document type is not guessed.</span></div><span class="route-summary-tag">OVERVIEW</span></div>
+              <div class="route-summary"><span class="route-summary-icon" aria-hidden="true">▧</span><div><b id="route-summary-title">Dataset sample 001</b><span id="route-summary-detail">Original source image with selected identity values redacted.</span></div><span class="route-summary-tag">OVERVIEW</span></div>
               <button class="button button-primary run-button" id="run-overview" type="button">Show overview object <span aria-hidden="true">↗</span></button>
             </section>
 
@@ -75,6 +75,7 @@
               <div class="panel-heading"><span class="panel-step">02</span><div><h2>Run OCR on your computer</h2><p>Choose an image, then start the pipeline manually.</p></div></div>
               <div class="local-health" id="local-health" role="status" aria-live="polite">
                 <span class="health-indicator" aria-hidden="true"></span><div><b id="local-health-title">Checking local runner</b><span id="local-health-detail">The model will not load until you start OCR.</span></div>
+                <button class="health-retry" id="check-local-connection" type="button">Check connection ↻</button>
               </div>
               <label class="upload-zone" for="local-image">
                 <span class="upload-icon" aria-hidden="true">↑</span><b>Choose a document image</b><span>JPG, PNG, or WebP · up to 8 MB and 6 megapixels</span>
@@ -89,7 +90,7 @@
                 <div class="local-model-heading"><b>Local model</b><span>LOCAL PATH</span></div>
                 <code id="det-model-path">models/PP-OCRv6_small_det/</code>
                 <code id="rec-model-path">models/PP-OCRv6_small_rec/</code>
-                <p>This runner uses the PP-OCRv6 baseline. Model weights are not included in the repository, and its results do not reproduce the V28 model. Place PaddleOCR models at these paths or update the backend configuration variables.</p>
+                <p>PP-OCRv6 CPU baseline. Add matching detector and recognizer weights at these paths, or configure your own model directories. The V28 research model is a separate configuration.</p>
               </div>
               <button class="button button-primary run-button" id="run-local-ocr" type="button" disabled>Run OCR locally <span aria-hidden="true">↗</span></button>
               <p class="local-runner-hint" id="local-runner-hint">Local mode is available only at <code>127.0.0.1:8787</code>. Install dependencies, add model weights, and start the local runner.</p>
@@ -103,7 +104,7 @@
             </div>
             <div class="result-meta"><span id="result-document">Dataset sample 001</span><span class="synthetic-pill" id="result-kind">PLACEHOLDER</span></div>
             <div class="field-preview" id="field-preview"></div>
-            <div class="json-heading"><span>OBJECT JSON</span><span>application/json</span></div>
+            <div class="json-heading"><span>JSON OBJECT</span><span>application/json</span></div>
             <pre class="json-output"><code id="json-output"></code></pre>
             <div class="result-foot"><span class="foot-check" aria-hidden="true">i</span><span id="result-status">Overview placeholder · OCR has not been run</span></div>
           </aside>

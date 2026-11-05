@@ -88,9 +88,9 @@ if (document.body.hasAttribute("data-simulation")) {
 
     byId("sample-art").src = sample.image;
     byId("sample-art").alt = sample.alt;
-    byId("sample-caption").textContent = "DRIVE · " + sample.filename + " · selected details redacted";
+    byId("sample-caption").textContent = "DATASET · " + sample.filename + " · selected details redacted";
     byId("route-summary-title").textContent = sample.label;
-    byId("route-summary-detail").textContent = "One labeled photo from the Drive folder. The document type is not guessed.";
+    byId("route-summary-detail").textContent = "Original source image with selected identity values redacted.";
 
     const object = {
       dataset_source: sample.filename,
@@ -146,9 +146,13 @@ if (document.body.hasAttribute("data-simulation")) {
       return;
     }
 
-    setHealthState("loading", "Checking local model", "Checking the backend on this computer only.");
+    const connectionButton = byId("check-local-connection");
+    connectionButton.disabled = true;
+    const healthController = new AbortController();
+    const healthTimeout = window.setTimeout(() => healthController.abort(), 8000);
+    setHealthState("loading", "Checking backend connection", "Checking the local API without loading the OCR model.");
     try {
-      const response = await fetch("/api/health", { cache: "no-store", credentials: "same-origin" });
+      const response = await fetch("/api/health", { cache: "no-store", credentials: "same-origin", signal: healthController.signal });
       if (!response.ok) throw new Error("health endpoint unavailable");
       const health = await response.json();
       byId("det-model-path").textContent = health.model_paths.det;
@@ -156,16 +160,19 @@ if (document.body.hasAttribute("data-simulation")) {
       window.localOcrReady = Boolean(health.ready);
 
       if (health.ready) {
-        setHealthState("ready", "Local backend is ready", health.model_label + " is available. The model loads when you run OCR for the first time.");
+        setHealthState("ready", "Backend connected · model files ready", health.model_label + (health.loaded ? " is already loaded on this computer." : " has not been loaded. It loads only when you start OCR."));
         byId("local-runner-hint").textContent = "The image is not uploaded until you select Run OCR.";
       } else {
-        setHealthState("missing", "Model weights not found", "Place the model files at the paths shown. " + health.message);
+        setHealthState("missing", "Backend connected · model files missing", "The connection is working. No OCR model has been loaded. " + health.message);
         byId("local-runner-hint").textContent = "Model weights are not included in the repository; the backend will not download them automatically.";
       }
     } catch {
       window.localOcrReady = false;
       setHealthState("offline", "Local runner is offline", "Install dependencies and add model weights, run local_runner\\start-local.ps1, then open 127.0.0.1:8787.");
       byId("local-runner-hint").textContent = "No images are sent to the public host or a remote server.";
+    } finally {
+      window.clearTimeout(healthTimeout);
+      connectionButton.disabled = false;
     }
     refreshRunButton();
   }
@@ -197,7 +204,7 @@ if (document.body.hasAttribute("data-simulation")) {
     if (mode === "overview") {
       byId("notice-title").textContent = "Overview · real dataset samples";
       byId("notice-copy").textContent = "Faces and selected identity values are redacted. The JSON shown is a placeholder; OCR does not run in this mode.";
-      byId("notice-tag").textContent = "DRIVE DATASET";
+      byId("notice-tag").textContent = "SOURCE DATASET";
       renderOverview(selectedSample);
     } else {
       byId("notice-title").textContent = "Run OCR on your computer";
@@ -261,6 +268,7 @@ if (document.body.hasAttribute("data-simulation")) {
   });
 
   byId("cancel-local-mode").addEventListener("click", () => localDialog.close());
+  byId("check-local-connection").addEventListener("click", () => void checkLocalRunner());
 
   sampleButtons.forEach((button) => {
     button.addEventListener("click", () => {
@@ -384,4 +392,7 @@ if (document.body.hasAttribute("data-simulation")) {
     });
   }
   renderOverview(selectedSample);
+  if (new URLSearchParams(window.location.search).get("mode") === "local") {
+    requestLocalMode();
+  }
 }

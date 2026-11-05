@@ -35,6 +35,8 @@ See [models/README.md](models/README.md) for model paths and profile options. St
 
 Open http://127.0.0.1:8787, choose **Run locally**, and upload an image. The image is sent only to the loopback API on that computer. The public website does not receive OCR uploads. The model is loaded on the first OCR request.
 
+Use **Check connection** in local mode to query the health endpoint without loading the model. The workspace reports backend connectivity and model-file availability separately.
+
 ## OCR model pipeline architecture
 
 This diagram focuses on the document-understanding model pipeline, from image assessment through structured field extraction.
@@ -96,3 +98,5 @@ archived/                       V3–V28 experiments, notebooks, scripts, and re
 ~~~
 
 The contents of archived/ are retained for provenance. They are not required to serve the website or run the local OCR baseline.
+
+The landing page combines real redacted dataset previews with a decorative generated workspace photograph. See the [visual asset notes](docs/visual-assets.md) for the image source and generation prompt.

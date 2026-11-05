@@ -418,6 +418,21 @@ img { max-width: 100%; }
 .dialog-actions .button { min-height: 43px; }
 .mode-tab:focus-visible, .choice-card:focus-visible, .upload-zone:focus-within, .copy-button:focus-visible, .button:focus-visible, .text-button:focus-visible { outline: 3px solid rgba(49,92,245,.34); outline-offset: 2px; }
 
+/* Match the product site's quieter surfaces and typography. */
+.simulation-page { background: #F5F7FB; }
+.simulation-page .site-header { height: 80px; }
+.simulation-page .brand-name { font-size: 24px; }
+.simulation-page .sim-panel, .simulation-page .result-panel { border-radius: 14px; }
+.simulation-page .result-panel { background: #14263B; border-color: #14263B; }
+.simulation-page .mode-tab { border-radius: 11px; }
+.simulation-page .button { border-radius: 10px; }
+.simulation-page .local-health { flex-wrap: wrap; }
+.simulation-page .local-health > div { flex: 1; min-width: 180px; }
+.health-retry { margin-left: 19px; padding: 7px 9px; border: 1px solid #BCC9DD; border-radius: 6px; color: #2447D8; background: rgba(255,255,255,.85); font: 700 10px 'Manrope','Segoe UI',sans-serif; cursor: pointer; white-space: nowrap; }
+.health-retry:hover { background: #fff; border-color: #315CF5; }
+.health-retry:disabled { opacity: .55; cursor: wait; }
+.health-retry:focus-visible { outline: 3px solid #315CF5; outline-offset: 3px; }
+
 @media (max-width: 700px) {
   .mode-switch { grid-template-columns: 1fr; gap: 8px; }
   .mode-tab { padding: 12px 13px; }
